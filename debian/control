@@ -1,0 +1,71 @@
+Source: neos
+Priority: optional
+Maintainer: Mehdi Dogguy <mehdi.dogguy@edf.fr>
+Build-Depends:
+ debhelper (>= 8),
+ dh-python,
+ python-all (>= 2.7),
+ python-setuptools,
+ python-sphinx,
+ python-sphinx-rtd-theme
+X-Python-Version: >= 2.7
+Standards-Version: 3.9.3
+Section: devel
+Vcs-Browser: https://github.com/edf-hpc/neos
+Vcs-Git: https://github.com/edf-hpc/neos.git
+
+Package: neos
+Architecture: all
+Depends:
+ ${shlibs:Depends},
+ ${misc:Depends},
+ ${python:Depends}
+Description: HPC job sessions manager framework
+ This package contains the NEOS software which provides a generic framework to
+ manage job sessions on HPC clusters.
+ .
+ The framework is based on scenarios. A scenario defines the sequential steps
+ to properly setup and initialize the job session. Users select the scenario
+ for their jobs and can even define their own scenarios. The frawework can
+ manage a wide variety of workloads from classic MPI parallel computing to
+ advanced visualization sessions with 3D remote rendering.
+ .
+ NEOS is fully integrated with open-source Slurm workload manager and modules
+ environment manager.
+ .
+ This package should be installed on all nodes (frontends as well as compute
+ nodes).
+
+Package: neos-scenarios-graphical
+Architecture: all
+Depends:
+ ${shlibs:Depends},
+ ${misc:Depends},
+ ${python:Depends},
+ neos,
+ xauth,
+ xvfb,
+ x11-xserver-utils,
+ x11vnc
+Recommends:
+ xfce4-session,
+ gnome-session-bin
+Suggests:
+ paraview,
+ salome
+Description: NEOS scenarios for graphical nodes
+ This package provides scenarios for NEOS to use on graphical nodes of a
+ cluster. This includes scenarios for VNC (with Xfce4 and Gnome window
+ managers), Paraview and Salome sessions.
+
+Package: neos-slurm-graphical-plugins
+Architecture: all
+Depends:
+ ${shlibs:Depends},
+ ${misc:Depends},
+ ${perl:Depends},
+ slurm-llnl-generic-scripts-plugin,
+ x11-xserver-utils
+Description: NEOS Slurm plugins for graphical nodes
+ This package contains all Slurm prolog/epilog scripts to install on graphical
+ nodes.
