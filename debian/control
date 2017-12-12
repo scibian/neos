@@ -1,6 +1,6 @@
 Source: neos
 Priority: optional
-Maintainer: Mehdi Dogguy <mehdi.dogguy@edf.fr>
+Maintainer: Scibian Project <packaging@scibian.org>
 Build-Depends:
  debhelper (>= 8),
  dh-python,
@@ -11,8 +11,8 @@ Build-Depends:
 X-Python-Version: >= 2.7
 Standards-Version: 3.9.3
 Section: devel
-Vcs-Browser: https://github.com/edf-hpc/neos
-Vcs-Git: https://github.com/edf-hpc/neos.git
+Vcs-Browser: https://github.com/scibian/neos
+Vcs-Git: https://github.com/scibian/neos.git
 
 Package: neos
 Architecture: all
