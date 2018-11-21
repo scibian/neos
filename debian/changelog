@@ -1,3 +1,10 @@
+neos (0.6.12-0sci8u1) scibian8; urgency=medium
+
+  * debian: change to quilt format
+  * New upstream version 0.6.12
+
+ -- Thomas Hamel <thomas-t.hamel@edf.fr>  Wed, 21 Nov 2018 19:12:54 +0100
+
 neos (0.6.11sci9u1) scibian9; urgency=medium
 
   * Rebuild for scibian9
