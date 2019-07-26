@@ -1,3 +1,9 @@
+neos (0.6.13-0sci8u1) scibian8; urgency=medium
+
+  * New upstream version 0.6.13
+
+ -- MHamed Bouaziz <mhamed-externe.bouaziz@edf.fr>  Fri, 26 Jul 2019 14:28:32 +0200
+
 neos (0.6.12-0sci8u1) scibian8; urgency=medium
 
   * debian: change to quilt format
