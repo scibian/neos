@@ -1,3 +1,9 @@
+neos (0.6.13-0sci9u2) scibian9; urgency=medium
+
+  * Force python2 clustershell package dep
+
+ -- Rémi Palancher <remi-externe.palancher@edf.fr>  Fri, 14 May 2021 16:23:39 +0200
+
 neos (0.6.13-0sci9u1) scibian9; urgency=medium
 
   * New upstream version 0.6.13.
