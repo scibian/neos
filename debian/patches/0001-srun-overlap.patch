@@ -1,0 +1,30 @@
+Description: Allow nested srun to overlap
+ Recent versions of Slurm >= 20.11 do not allow by default srun in srun
+ to overlap on the same resources. The nested srun waits (endlessly
+ here) the parent srun to finish and release the resources. With neos, it
+ actually prevents the window manager to start in the neos job.
+ 
+ The previous srun behaviour can be obtained with --overlap parameter, to
+ allow the nested srun to use the same resources as the parent neos srun.
+Author: Rémi Palancher <remi-externe.palancher@edf.fr>
+Forwarded: https://github.com/edf-hpc/neos/commit/5833f13fdbae615d2b9b85b9b40d8510df9d919b
+Last-Update: 2021-06-02
+
+diff --git a/neos/scenarios/wm.py b/neos/scenarios/wm.py
+index 4ef75b0..9858015 100644
+--- a/neos/scenarios/wm.py
++++ b/neos/scenarios/wm.py
+@@ -87,7 +87,12 @@ class ScenarioWM(Scenario):
+ 
+         # Launch the window manager once on every nodes of the job, as this is
+         # a requirement for distributed rendering solutions such as paraview.
+-        cmd = ['srun', '--tasks-per-node=1',
++        #
++        # Additional parameter --overlap is required with Slurm >= 20.11 to run
++        # the step within the same resources as the parent step launching neos.
++        # Otherwise, this nested srun will wait endlessly the parent srun to
++        # finish and release the ressources.
++        cmd = ['srun', '--tasks-per-node=1', '--overlap',
+                'dbus-launch', '--exit-with-session', wm]
+         self.cmd_run_bg(cmd, stderr=stderr)
+

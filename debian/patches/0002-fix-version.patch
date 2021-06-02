@@ -1,0 +1,14 @@
+Description: Fix version number
+Forwarded: Fixed upstream with 0.6.14
+Last-Update: 2021-06-02
+
+diff --git a/neos/version.py b/neos/version.py
+index a8204e5..4d5bdae 100644
+--- a/neos/version.py
++++ b/neos/version.py
+@@ -34,4 +34,4 @@
+ """This module just provides NEOS version as used by --version, setup.py and
+    Sphinx documentation."""
+ 
+-__version__ = "0.6.12"
++__version__ = "0.6.13"
