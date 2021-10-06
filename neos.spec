@@ -2,7 +2,7 @@
 
 Summary: HPC job sessions manager framework
 Name: neos
-Version: 0.6.14
+Version: 0.6.15
 Release: 1%{?dist}.edf
 Source0: %{name}-%{version}.tar.gz
 License: GPLv3
