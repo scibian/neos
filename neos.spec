@@ -2,7 +2,7 @@
 
 Summary: HPC job sessions manager framework
 Name: neos
-Version: 0.6.15
+Version: 0.6.16
 Release: 1%{?dist}.edf
 Source0: %{name}-%{version}.tar.gz
 License: GPLv3
@@ -87,5 +87,8 @@ Requires: neos-core, slurm-llnl-generic-scripts-plugin, xorg-x11-utils
 /usr/lib/neos/exec/contribs/restore-xorg-resolution.sh
 
 %changelog
+* Thu Feb 24 2022 Rémi Palancher <remi-externe.palancher@edf.fr> 0.6.16-1.el8.edf
+- New upstream release 0.6.16
+- Symlink scenarios instead of duplication
 * Tue Feb 02 2021 Guillaume RANQUET <guillaume-externe.ranquet@edf.fr> 0.6.14
 - Initial RPM release based on 0.6.14
