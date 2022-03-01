@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
 #  Copyright (C) 2016-2018 EDF SA
@@ -34,4 +34,4 @@
 """This module just provides NEOS version as used by --version, setup.py and
    Sphinx documentation."""
 
-__version__ = "0.6.15"
+__version__ = "0.6.16"
