@@ -37,10 +37,9 @@ python3 setup.py install --single-version-externally-managed -O1 --root=%{buildr
 install -d %{buildroot}/etc/neos
 install -d %{buildroot}/usr/lib/neos/exec
 install -d %{buildroot}/usr/lib/neos/exec/contribs
-install -d %{buildroot}/usr/lib/neos/scenarios
 install -m 644 conf/neos.conf %{buildroot}/etc/neos
+ln -s %{python3_sitelib}/neos/scenarios %{buildroot}/usr/lib/neos/scenarios
 install -m 755 scripts/* %{buildroot}/usr/lib/neos/exec/
-install -m 755 neos/scenarios/* %{buildroot}/usr/lib/neos/scenarios/
 install -m 755 contribs/restore-xorg-resolution.sh %{buildroot}/usr/lib/neos/exec/contribs
 
 %clean
@@ -74,14 +73,13 @@ Requires: neos-core, slurm-llnl-generic-scripts-plugin, xorg-x11-utils
 /usr/bin/neos
 /usr/lib/neos/exec/neos
 /usr/lib/neos/exec/neos_inenv
-/usr/lib/neos/scenarios/__init__.py
 %{python3_sitelib}/neos/*.py
 %{python3_sitelib}/neos/__pycache__/*.pyc
 %{python3_sitelib}/NEOS*egg-info/*
 
 
 %files scenarios-graphical
-/usr/lib/neos/scenarios/*.py
+/usr/lib/neos/scenarios
 %{python3_sitelib}/neos/scenarios/*.py
 %{python3_sitelib}/neos/scenarios/__pycache__/*.pyc
 
