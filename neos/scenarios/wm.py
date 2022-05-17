@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
 #  Copyright (C) 2016 EDF SA
@@ -85,10 +85,23 @@ class ScenarioWM(Scenario):
         os.environ['DISPLAY'] = ":%s" % (self.display)
         os.environ['XAUTHORITY'] = self.opts.xauthfile
 
+        i = 0
+        while self.cmd_wait(['xset', '-q']):
+            i += 1
+            if i >= 30:
+                print('Error: X11 server not ready')
+                return 1
+            self.sleep(1)
+
         # Launch the window manager once on every nodes of the job, as this is
         # a requirement for distributed rendering solutions such as paraview.
-        cmd = ['srun', '--tasks-per-node=1',
-               'dbus-launch', '--exit-with-session', wm]
+        #
+        # Additional parameter --overlap is required with Slurm >= 20.11 to run
+        # the step within the same resources as the parent step launching neos.
+        # Otherwise, this nested srun will wait endlessly the parent srun to
+        # finish and release the ressources.
+        cmd = ['srun', '--tasks-per-node=1', '--overlap',
+               'dbus-launch', '--exit-with-x11', wm]
         self.cmd_run_bg(cmd, stderr=stderr)
 
         self.sleep(1)

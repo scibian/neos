@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
 #  Copyright (C) 2016 EDF SA
@@ -87,7 +87,7 @@ class LogFile(object):
             logger.debug("opening logfile %s", self.path)
             try:
                 self.fd = open(self.path, 'a+')
-            except IOError, err:
+            except IOError as err:
                 logger.error("unable to open logfile %s: %s", self.path, err)
                 return None
         return self.fd

@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
 #  Copyright (C) 2016 EDF SA
@@ -223,7 +223,7 @@ class AppInEnv(object):
                 imp.find_module(scenario_basedir, [scenario_parent_dir])
             logger.debug("find_module on package: filemod: %s pathname: %s",
                          str(filemod), pathname)
-        except ImportError, e:
+        except ImportError as e:
             logger.debug("error while trying to find package: %s", str(e))
             return
 
@@ -231,7 +231,7 @@ class AppInEnv(object):
             module = imp.load_module('scenarios', None,
                                      pathname, description)
             logger.debug("package %s (type %s)", str(module), type(module))
-        except ImportError, e:
+        except ImportError as e:
             logger.debug("error while trying to import package: %s", str(e))
             return
 
@@ -246,7 +246,7 @@ class AppInEnv(object):
                 imp.find_module(module_file, [module_dir])
             logger.debug("find_module on module: filemod: %s pathname: %s",
                          str(filemod), pathname)
-        except ImportError, e:
+        except ImportError as e:
             logger.debug("error while trying to find module: %s", str(e))
             return
 
@@ -254,7 +254,7 @@ class AppInEnv(object):
             module = imp.load_module('scenario', filemod,
                                      pathname, description)
             logger.debug("module %s (type %s)", str(module), type(module))
-        except ImportError, e:
+        except ImportError as e:
             logger.debug("error while trying to import module: %s", str(e))
             filemod.close()
             return
@@ -278,7 +278,7 @@ class AppInEnv(object):
 
     def find_scenario(self, name):
 
-        scenario = filter(lambda x: x.name == name, self.scenarios)
+        scenario = [x for x in self.scenarios if x.name == name]
         if not len(scenario):
             logger.error("unable to find scenario %s in loaded scenarios",
                          name)
@@ -289,14 +289,14 @@ class AppInEnv(object):
         """Print on stdout the list of usable scenarios with their optional
            parameters."""
         for scenario in self.scenarios:
-            print "- %s (%s)" % (scenario.name, scenario.modname)
+            print("- %s (%s)" % (scenario.name, scenario.modname))
             for opt in scenario.instance.opts:
-                print "    - %-15s (%s): %s" % opt
+                print("    - %-15s (%s): %s" % opt)
 
     def dump_env(self):
 
         logger.debug('environment:')
-        for key, value in os.environ.iteritems():
+        for key, value in os.environ.items():
             logger.debug(">> %s: %s", key, value)
 
     def run(self):

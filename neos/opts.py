@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
 #  Copyright (C) 2016 EDF SA
@@ -65,7 +65,7 @@ class ScenarioOpts(object):
 
     def __iter__(self):
 
-        for name, opt in self._opts.iteritems():
+        for name, opt in self._opts.items():
             yield (opt.name, opt.p_type.__name__, str(opt.value))
 
     @staticmethod
@@ -121,7 +121,7 @@ class ScenarioOpts(object):
 
         try:
             opt_defval = ScenarioOpts._parse_value(opt_type, opt_defval_s)
-        except TypeError, e:
+        except TypeError as e:
             logger.error("error while parsing value: %s", e)
             return (None, None, None)
 
@@ -138,13 +138,13 @@ class ScenarioOpts(object):
 
         try:
             opt_type = self._opts[opt_name].p_type
-        except KeyError, e:
+        except KeyError as e:
             logger.error("unknown opt %s: %s", opt_name, e)
             return (None, None)
 
         try:
             opt_val = ScenarioOpts._parse_value(opt_type, opt_val_s)
-        except TypeError, e:
+        except TypeError as e:
             logger.error("error while parsing value: %s", e)
             return (None, None)
 
