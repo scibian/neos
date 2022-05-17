@@ -1,4 +1,4 @@
-neos (0.6.16) calibre9; urgency=medium
+neos (0.6.16-0sci9u1) calibre9; urgency=medium
 
   * Allow nested srun to overlap parent srun
   * Bump shebang to python3
