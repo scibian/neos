@@ -1,2 +1,4 @@
-pyslurm python-pyslurm
-clustershell python-clustershell
+pyslurm python3-pyslurm
+clustershell python3-clustershell
+six python3-six
+pytz python3-tz
