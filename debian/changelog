@@ -1,3 +1,14 @@
+neos (0.6.16-0sci9u2) scibian9; urgency=medium
+
+  [ Mathieu Chouquet-Stringer ]
+  * Removed patches as they're no longer needed
+
+  [ Kwame Amedodji ]
+  * fix setup.py issue with to python3
+  * fix issue with uncorrect python3 dependencies
+
+ -- Kwame Amedodji <kwame-externe.amedodji@edf.fr>  Wed, 12 Oct 2022 02:01:02 +0200
+
 neos (0.6.16-0sci9u1) calibre9; urgency=medium
 
   * Allow nested srun to overlap parent srun
