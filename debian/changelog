@@ -1,3 +1,9 @@
+neos (0.6.16-0sci9u3) scibian9; urgency=medium
+
+  * bump build dependencies to python3.5+
+
+ -- Kwame Amedodji <kwame-externe.amedodji@edf.fr>  Wed, 12 Oct 2022 02:05:02 +0200
+
 neos (0.6.16-0sci9u2) scibian9; urgency=medium
 
   [ Mathieu Chouquet-Stringer ]
