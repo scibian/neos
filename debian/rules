@@ -3,10 +3,10 @@
 
 include /usr/share/dpkg/pkg-info.mk
 
-PYTHON_VERSION = $(shell pyversions -r)
+PYTHON_VERSION = $(shell py3versions -r)
 
 %:
-	dh $@ --with python2,sphinxdoc
+	dh $@ --with python3,sphinxdoc --buildsystem=pybuild
 
 override_dh_auto_build:
 	dh_auto_build
@@ -18,6 +18,8 @@ override_dh_auto_build:
 override_dh_auto_install:
 	$(PYTHON_VERSION) setup.py install --force --root=$(CURDIR)/debian/$(DEB_SOURCE) --no-compile -O0 --install-layout=deb
 
+# disable unit tests as they are not designed to run during package builds
+override_dh_auto_test:
+
 clean:
-	dh $@
-	rm -rf *.egg-info
+	dh_clean
