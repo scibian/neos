@@ -1,3 +1,10 @@
+neos (0.6.17-0sci9u1) scibian9; urgency=medium
+
+  * Fixed dbus-launch --exit-with-{session,x11} parameter
+  * We really are on sci9
+
+ -- Mathieu Chouquet-Stringer <mathieu-externe.chouquet-stringer@edf.fr>  Thu, 03 Nov 2022 15:08:59 +0100
+
 neos (0.6.16-0sci10u4) scibian9; urgency=medium
 
   * fix uncorrect python3 dependencies issue
