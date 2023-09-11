@@ -21,7 +21,7 @@ Depends:
  ${shlibs:Depends},
  ${misc:Depends},
  ${python3:Depends},
- python3-pyslurm,
+ python3-pyslurm (>= 23.2),
  python3-clustershell,
  python3-six,
  python3-tz
