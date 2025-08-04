@@ -37,9 +37,10 @@ logger = logging.getLogger(__name__)
 import os
 from datetime import datetime
 import time
+import subprocess
+import json
 
 from ClusterShell.NodeSet import NodeSet
-import pyslurm
 from pytz import timezone
 
 from neos.utils import Singleton
@@ -74,7 +75,9 @@ class SlurmJob(object):
         else:
             logger.debug("running out of slurm job environment, "
                          "skipping job attributes filling")
-        # data filled using pyslurm with RPC to slurmctld
+        # data filled using scontrol
+        self.job_scontrol = None
+        self.gres = None
         self.shared = None
         self.end = None
 
@@ -89,13 +92,31 @@ class SlurmJob(object):
         return not self.known
 
     def rpc(self):
-        job_list = pyslurm.job().find_id(str(self.jobid))
-        job = job_list[0]
-        self.gres = None
-        if 'gres' in job.keys():
-            self.gres = job['gres']
-        self.shared = job['shared'] != '0'
-        self.end = datetime.fromtimestamp(job['end_time'], localtz())
+        if not self.job_scontrol:
+            try:
+                tmp = subprocess.run(
+                    ['/usr/bin/scontrol', '--json', 'show', 'job',
+                     str(self.jobid)],
+                    check=True, stdout=subprocess.PIPE
+                )
+            except subprocess.CalledProcessError as exc:
+                logger.error("NEOS couldn't get job information from scontrol: %s",
+                             exc.output)
+                raise
+
+            try:
+                self.job_scontrol = json.loads(tmp.stdout.decode('utf-8'))['jobs'][0]
+            except json.JSONDecodeError as exc:
+                logger.error("NEOS couldn't decode scontrol json output: %s",
+                             exc.msg)
+                raise
+
+        self.gres = self.job_scontrol.get('gres_detail', None)
+        self.shared = "none" not in self.job_scontrol.get('shared', [])
+        self.end = datetime.fromtimestamp(
+            self.job_scontrol['end_time']['number'],
+            localtz()
+        )
 
     @property
     def firstnode(self):
